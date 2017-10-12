@@ -1,0 +1,37 @@
+<launch>
+<!-- 
+roslaunch uuv_descriptions upload_rexrov.launch mode:=default x:=0 y:=0 z:=-20 namespace:=rexrov1
+roslaunch uuv_descriptions upload_rexrov.launch mode:=default x:=10 y:=10 z:=-20 namespace:=rexrov2
+roslaunch uuv_gazebo rexrov_default_logitech_joy.launch joy_id:=0 namespace:=rexrov1
+-->
+	<include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
+		<arg name="x" value="0"/>
+		<arg name="y" value="0"/>
+		<arg name="z" value="-20"/>
+		<arg name="namespace" value="rexrov1"/>
+	</include>
+
+	<include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
+		<arg name="x" value="10"/>
+		<arg name="y" value="10"/>
+		<arg name="z" value="-20"/>
+		<arg name="namespace" value="rexrov2"/>
+	</include>
+
+	<include file="$(find trajectory_generator_custom_controls)/launch/joystick.launch">
+		<arg name="joy_id" value="0"/>
+		<arg name="namespace" value="rexrov1"/>
+	</include>
+	
+	<!-- Start the dp_controller -->
+	<include file="$(find trajectory_generator_custom_controls)/launch/dp_controller.launch">
+		<arg name="uuv_name" value="rexrov2"/>
+		<arg name="model_name" value="rexrov"/>
+	</include>
+
+<!--
+for a pre-generated traj
+roslaunch uuv_control_utils send_waypoints_file.launch uuv_name:=rexrov2
+-->
+
+</launch>
