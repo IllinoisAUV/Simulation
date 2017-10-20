@@ -34,11 +34,10 @@ def ROVsimulation(procVar,measVar,N,dt):
 
      return control_acc, meas_pos, real_pos
 
-# N = int(1e4)                            # number of simulation sample point
-N = 100000
+N = int(1e5)            # number of simulation sample point
 dt = 1.0/100.0          # time interval for each sample point
 procVar = 0.001         # Process(Prediction) Noise
-measVar = 3                     # Measurement Noise
+measVar = 3             # Measurement Noise
 
 [control_acc, meas_pos, real_pos] = ROVsimulation(procVar,measVar,N,dt)
 
@@ -46,26 +45,20 @@ pos= []
 
 for i in range(N)[0::100]:
     pos.append(real_pos[:,i])
-    # print str(int(meas_pos[:,i][0])) + ' ' + str(int(meas_pos[:,i][1])) + ' ' + str(int(meas_pos[:,i][2]))
 
 code = yaml.load(u"""
-{'max_forward_speed': 0.4, 'use_fixed_heading': False, 'heading': 0, 'point': [0, 2, -22]}
+{'max_forward_speed': 0.9, 'use_fixed_heading': False, 'heading': 0, 'point': [0, 2, -22]}
 """)
 
 pos = pos[:100]
 
 print len(pos)
 
-# stream1 = file('example_waypoints.yaml', 'r')
-# code = yaml.load(stream1)
 stream = file('3D_traj_100.yaml', 'w')
 print code
 for i in pos:
     if (  int(i[2]) > 0):
         i[2] = -1 * int(i[2])
     code['point'] = (int(i[0]), int(i[1]), int(i[2]))
-    # code['max_forward_speed'] = 0.2
-    # code['heading'] = 0
-    # code['use_fixed_heading'] = False
     stream.write("-\n")
     yaml.dump(code, stream, indent= 8 )
