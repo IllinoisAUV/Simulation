@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="bluerov" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <!-- Input debug flag -->
+  <xacro:arg name="debug" default="0"/>
+
+  <!-- Vehicle's namespace -->
+  <xacro:arg name="namespace" default="bluerov"/>
+
+  <!-- Include the ROV macro file -->
+  <xacro:include filename="$(find bluerov_uuv)/models/bluerov/urdf/bluerov_base.xacro"/>
+
+  <!-- Create the bluerov -->
+  <xacro:bluerov_base namespace="$(arg namespace)" debug="$(arg debug)"/>
+
+  <!-- Joint state publisher plugin -->
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libjoint_state_publisher.so">
+      <robotNamespace>$(arg namespace)</robotNamespace>
+      <updateRate>50</updateRate>
+    </plugin>
+  </gazebo>
+
+</robot>
