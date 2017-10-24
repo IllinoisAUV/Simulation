@@ -18,7 +18,7 @@
   <arg name="mode" default="default"/>
 
   <!-- Vehicle's namespace -->
-  <arg name="namespace" default="rov_example"/>
+  <arg name="namespace" default="bluerov"/>
 
   <arg name="world_frame" default="world"/>
 

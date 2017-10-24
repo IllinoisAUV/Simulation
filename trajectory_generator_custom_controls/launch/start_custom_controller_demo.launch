@@ -9,7 +9,7 @@
     </include>
 
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
-    <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
+    <include file="$(find bluerov_uuv)/models/bluerov/launch/upload_bluerov.launch">
         <arg name="x" default="0"/>
         <arg name="y" default="0"/>
         <arg name="z" default="0"/>

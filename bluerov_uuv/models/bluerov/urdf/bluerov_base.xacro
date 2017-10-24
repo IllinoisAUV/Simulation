@@ -10,20 +10,22 @@
   <!--
     Vehicle's parameters
   -->
-
-  <xacro:property name="mass" value="0"/>
-  <xacro:property name="volume" value="0"/>
+  <!-- Mass in Kg, and length measurements in m-->
+  <xacro:property name="mass" value="12"/>
+  <xacro:property name="volume" value="0.05"/>
   <!-- Center of gravity -->
-  <xacro:property name="cog" value="0 0 0"/>
+  <xacro:property name="cog" value="0.24 0.165 0.22"/>
   <!-- Center of buoyancy -->
-  <xacro:property name="cob" value="0 0 0"/>
+  <xacro:property name="cob" value="0.24 0.165 0.22"/>
   <!-- Fluid density -->
   <xacro:property name="rho" value="1028"/>
 
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
   <!-- Describing the dimensions of the vehicle's bounding box -->
-  <xacro:property name="length" value="0"/>
-  <xacro:property name="width"  value="0"/>
-  <xacro:property name="height" value="0"/>
+  <xacro:property name="length" value="0.48"/>
+  <xacro:property name="width"  value="0.33"/>
+  <xacro:property name="height" value="0.38"/>
 
   <!-- Visual mesh file for the vehicle, usually in DAE (Collada) format -->
   <xacro:property name="visual_mesh_file" value="file://$(find bluerov_uuv)/models/bluerov/mesh/bluerov.dae"/>
@@ -31,7 +33,7 @@
   <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
   this geometry as simple as possible to improve the performance the physics engine
   regarding the computation of collision forces) -->
-  <xacro:property name="collision_mesh_file" value="file://$(find bluerov_uuv)/models/bluerov/mesh/vehicle.stl"/>
+  <xacro:property name="collision_mesh_file" value="file://$(find bluerov_uuv)/models/bluerov/mesh/collision.blend"/>
 
   <!-- Vehicle macro -->
   <xacro:macro name="bluerov_base" params="namespace debug">
@@ -41,15 +43,15 @@
       <inertial>
         <mass value="${mass}" />
         <origin xyz="${cog}" rpy="0 0 0"/>
-        <inertia ixx="0" ixy="0" ixz="0"
-                 iyy="0" iyz="0"
-                 izz="0" />
+        <inertia ixx="5" ixy="0.0" ixz="0.0"
+                 iyy="5" iyz="5"
+                 izz="5" />
       </inertial>
 
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="-0.241 0.165 0.17" rpy="${-PI/2} 0 -${PI/2}"/>
         <geometry>
-          <mesh filename="${visual_mesh_file}" scale="1 1 1" />
+          <mesh filename="${visual_mesh_file}" scale="0.001 0.001 0.001" />
         </geometry>
       </visual>
 
@@ -63,6 +65,13 @@
 
   <gazebo reference="${namespace}/base_link">
     <selfCollide>false</selfCollide>
+  </gazebo>
+
+  <gazebo>
+      <!-- optional: plugin to test compare Gazebo's returned accelerations -->
+    <plugin name="${namespace}_test_plugin" filename="libaccelerations_test_plugin.so">
+      <link_name>${namespace}/base_link</link_name>
+    </plugin>
   </gazebo>
 
   <!-- Dummy link for the frame in SNAME standard, Gazebo does not offer
@@ -111,54 +120,27 @@
           <!-- Center of buoyancy -->
           <center_of_buoyancy>${cob}</center_of_buoyancy>
 
-          <!--
-          ----------------------------------------------------
-          ----------------------------------------------------
-          Choose one of the hydrodynamic models below, all are based on
-          Fossen's equation of motion for underwater vehicles
-
-          Reference:
-          Fossen, Thor I. Handbook of marine craft hydrodynamics and motion
-          control. John Wiley & Sons, 2011.
-          ----------------------------------------------------
-          ---------------------------------------------------->
-
           <!-- Fossen's equation of motion -->
           <hydrodynamic_model>
-            <type>fossen</type>
-            <added_mass>
-              0 0 0 0 0 0
-              0 0 0 0 0 0
-              0 0 0 0 0 0
-              0 0 0 0 0 0
-              0 0 0 0 0 0
-              0 0 0 0 0 0
-            </added_mass>
-            <!--
-            The linear damping coefficients can be provided as a diagonal (6 elements)
-            or a full matrix (36 coefficients), like the added-mass coefficients above
-            -->
-            <linear_damping>
-              0 0 0 0 0 0
-            </linear_damping>
-            <!--
-            The linear damping coefficients proportional to the forward speed
-            can be provided as a diagonal (6 elements) or a full matrix (36 coefficients),
-            like the added-mass coefficients above.
-            This matrix is mostly useful for slender bodies (e.g. AUVs with torpedo shape)
-            -->
-            <linear_damping_forward_speed>
-              0 0 0 0 0 0
-            </linear_damping_forward_speed>
-            <!--
-            The quadratic damping coefficients can be provided as a diagonal (6 elements)
-            or a full matrix (36 coefficients), like the added-mass coefficients above
-            -->
-            <quadratic_damping>
-              0 0 0 0 0 0
-            </quadratic_damping>
+                 <type>fossen</type>
+                 <!-- Added mass: see p.28 in Berg2012 -->
+                 <added_mass>
+                      779.79 -6.8773 -103.32  8.5426 -165.54 -7.8033
+                     -6.8773    1222   51.29  409.44 -5.8488  62.726
+                     -103.32   51.29  3659.9  6.1112 -386.42  10.774
+                      8.5426  409.44  6.1112   534.9 -10.027  21.019
+                     -165.54 -5.8488 -386.42 -10.027  842.69 -1.1162
+                     -7.8033  62.726  10.775  21.019 -1.1162  224.32
+                 </added_mass>
+                 <!-- Linear damping: see p.31 in Berg2012 -->
+                 <linear_damping>
+                     -74.82 -69.48 -728.4 -268.8 -309.77 -105
+                 </linear_damping>
+                 <!-- Non-linear damping: see p.30 in Berg2012 -->
+                 <quadratic_damping>
+                     -748.22 -992.53 -1821.01 -672 -774.44 -523.27
+                 </quadratic_damping>
           </hydrodynamic_model>
-
         </link>
       </plugin>
     </gazebo>
