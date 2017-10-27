@@ -10,7 +10,8 @@ from nav_msgs.msg import Odometry
 from gazebo_msgs.msg import ModelStates
 
 imu_file            = open('imu.txt', 'wb')
-mag_file            = open('magnetometer.txt', 'wb')
+mag_t_file            = open('magnetometer_true.txt', 'wb')
+mag_m_file            = open('magnetometer_measured.txt', 'wb')
 gps_file            = open('gps.txt', 'wb')
 pose_gt_file        = open('pose_gt.txt', 'wb')
 accel_b_file        = open('accel_b.txt', 'wb')
@@ -24,10 +25,15 @@ def Imucallback(data):
     json_str = json_message_converter.convert_ros_message_to_json(data)
     json.dump(json_str, imu_file)
 
-def Magnetometercallback(data):
-    global mag_file
+def MagnetometerTcallback(data):
+    global mag_t_file
     json_str = json_message_converter.convert_ros_message_to_json(data)
-    json.dump(json_str, mag_file)
+    json.dump(json_str, mag_t_file)
+
+def MagnetometerMcallback(data):
+    global mag_m_file
+    json_str = json_message_converter.convert_ros_message_to_json(data)
+    json.dump(json_str, mag_m_file)
 
 def GPScallback(data):
     global gps_file
@@ -70,8 +76,11 @@ def listener():
     # measured orientation and acceleration, Body frame
     rospy.Subscriber("/rexrov/imu", Imu, Imucallback)
 
+    # true Magnetic field
+    rospy.Subscriber("/rexrov/magentomter_true", MagneticField, MagnetometerTcallback)
+
     # measured Magnetic field
-    rospy.Subscriber("/rexrov/magnetometer", MagneticField, Magnetometercallback)
+    rospy.Subscriber("/rexrov/magentomter_measurement", MagneticField, MagnetometerMcallback)
 
     # measured position, Body frame
     rospy.Subscriber("/rexrov/gps", NavSatFix, GPScallback )
