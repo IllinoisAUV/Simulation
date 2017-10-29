@@ -94,7 +94,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="${visual_mesh_file}" scale="0.001 0.001 0.001"/>
+          <mesh filename="${visual_mesh_file}" scale="0.005 0.005 0.005"/>
         </geometry>
       </visual>
       <!-- bottom plate -->
