@@ -27,32 +27,7 @@
       <param name="robot_description" value="/$(arg namespace)/robot_description" />
     </node>
   </group>
-
-  <!-- <group ns="$(arg namespace)">
-    <param name="robot_description" command="$(find xacro)/xacro.py '$(find bluerov_uuv)/models/rexrov/robots/rexrov_$(arg mode).xacro' debug:=$(arg debug) namespace:=$(arg namespace)" /> -->
-    <!-- <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find bluerov_ffg)/urdf/brov.xacro' debug:=$(arg debug) namespace:=$(arg namespace)"/> -->
-    <!-- <rosparam file="$(find bluerov_ffg)/config/brov.yaml" command="load"/> -->
-
-    <!-- A joint state publisher plugin already is started with the model, no need to use the default joint state publisher -->
-    <!-- <group ns="thrusters">
-      <param name="robot_description" command="$(find xacro)/xacro --inorder $(find bluerov_ffg)/urdf/brov_dummy.urdf"/>
-      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="true">
-        <param name="use_gui" value="True"/>
-        <remap from="joint_states" to="/brov/thruster_command" />
-      </node>
-    </group> -->
-
-    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
-    <!-- <node name="urdf_spawner" pkg="uuv_descriptions" type="spawn_model.py" respawn="false" output="screen"
-          args="-urdf -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg namespace) -param /$(arg namespace)/robot_description"/> -->
-
-    <!-- Publish robot model for ROS -->
-    <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen">
-      <param name="robot_description" value="/$(arg namespace)/robot_description" />
-      <param name="publish_frequency" value="5" />
-    </node>
-  </group> -->
-
+  
   <include file="$(find uuv_descriptions)/models/common/launch/message_to_tf.launch">
     <arg name="namespace" value="$(arg namespace)"/>
   </include>
