@@ -6,8 +6,8 @@
   <arg name="x"     default="0"/>
   <arg name="y"     default="0"/>
   <arg name="z"     default="0"/>
-  <arg name="roll"  default="0"/>
-  <arg name="pitch" default="90"/>
+  <arg name="roll"  default="-80"/>
+  <arg name="pitch" default="0"/>
   <arg name="yaw"   default="0"/>
 
   <!-- Mode to open different robot configurations as set the in file
