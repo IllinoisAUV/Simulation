@@ -8,15 +8,18 @@ from geometry_msgs.msg import Accel
 from sensor_msgs.msg import Imu, MagneticField, NavSatFix, FluidPressure
 from nav_msgs.msg import Odometry
 from gazebo_msgs.msg import ModelStates
+from rosgraph_msgs.msg import Clock
 
-imu_file            = open('imu.txt', 'wb')
-mag_t_file            = open('magnetometer_true.txt', 'wb')
-mag_m_file            = open('magnetometer_measured.txt', 'wb')
-gps_file            = open('gps.txt', 'wb')
-pose_gt_file        = open('pose_gt.txt', 'wb')
-accel_b_file        = open('accel_b.txt', 'wb')
-accel_w_file        = open('accel_w.txt', 'wb')
-pressure_file       = open('pressure.txt', 'wb')
+
+imu_file                = open('imu.txt', 'wb')
+mag_t_file              = open('magnetometer_true.txt', 'wb')
+mag_m_file              = open('magnetometer_measured.txt', 'wb')
+gps_file                = open('gps.txt', 'wb')
+pose_gt_file            = open('pose_gt.txt', 'wb')
+accel_b_file            = open('accel_b.txt', 'wb')
+accel_w_file            = open('accel_w.txt', 'wb')
+pressure_file           = open('pressure.txt', 'wb')
+clock_file              = open('clock.txt', 'wb')
 g_model_states_file_lin = open('g_model_states_twist.txt', 'wb')
 g_model_states_file_pos = open('g_model_states_position.txt', 'wb')
 
@@ -53,6 +56,7 @@ def PoseGTcallback(data):
 def GModelStatescallback(data):
     global g_model_states_file_lin
     global g_model_states_file_pos
+    global g_model_states_file_clo
 
     json_str1 = json_message_converter.convert_ros_message_to_json(data.twist[3])
     json.dump(json_str1, g_model_states_file_lin)
@@ -69,6 +73,11 @@ def AccelWcallback(data):
     global accel_w_file
     json_str = json_message_converter.convert_ros_message_to_json(data)
     json.dump(json_str, accel_w_file)
+
+def Clockcallback(data):
+    global clock_file
+    json_str = json_message_converter.convert_ros_message_to_json(data)
+    json.dump(json_str, clock_file)
 
 def listener():
     rospy.init_node('simdata_listener', anonymous=True)
@@ -100,8 +109,12 @@ def listener():
     # True Accelration World frame
     rospy.Subscriber("/accel_w_gazebo", Accel, AccelWcallback)
 
+    # Global clock
+    rospy.Subscriber("/clock", Clock, Clockcallback)
+
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
 if __name__ == '__main__':
+    print "Collecting Data"
     listener()
