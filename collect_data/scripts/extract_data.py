@@ -143,9 +143,6 @@ true_world_angular_velocity   = np.empty( [len(g_model_t_data), 3], dtype=float)
 # nano secs, same clock for world position, orientation, angular velocity
 true_world_poa_clock          = np.empty( [len(clock_data),     1], dtype=float)
 
-
-print "parsing data"
-
 ####################################################################################################
 # IMU
 for i in range(len(imu_data)):
@@ -223,5 +220,3 @@ for i in range(len(clock_data)):
 	true_world_poa_clock[i] = clock_data[i]["clock"]["nsecs"]
 
 #####################################################################################################
-
-print "done"
