@@ -6,26 +6,22 @@
   <link name="transdec_link">
 
   <visual name="surface">
-    <cast_shadows>false</cast_shadows>
-    <pose>0 0 0 0 0 0</pose>
-    <geometry>
-      <box>
-        <size>60 60 .1</size>
-      </box>
-    </geometry>
-    <material>
-      <script>
-        <uri>model://ocean_box/materials/scripts</uri>
-        <uri>model://ocean_box/materials/textures</uri>
-        <name>UUV/Water</name>
-      </script>
-    </material>
+      <pose>0 0 120 0 0 0</pose>
+      <geometry>
+          <mesh><uri>model://lake/meshes/WaterSurface.dae</uri><scale>1 1 1</scale></mesh>
+      </geometry>
+      <material>
+        <script>
+          <uri>file://Media/materials/scripts/water.material</uri>
+          <name>UUVSimulator/StaticTurquoiseWater</name>
+        </script>
+      </material>
   </visual>
 
   <visual name="transdec">
     <pose>0 0 0 0 0 0</pose>
     <geometry>
-      <mesh><uri>model://transdec/transdec.dae</uri><scale>1 1 1</scale></mesh>
+      <mesh><uri>model://transdec/transdec.dae</uri><scale>10 10 10</scale></mesh>
     </geometry>
     <material>
       <script>
@@ -39,7 +35,7 @@
   <collision name="transdec">
     <pose>0 0 0 0 0 0</pose>
     <geometry>
-      <mesh><uri>model://transdec/transdec.dae</uri><scale>1 1 1</scale></mesh>
+      <mesh><uri>model://transdec/transdec.dae</uri><scale>10 10 10</scale></mesh>
     </geometry>
   </collision>
 
