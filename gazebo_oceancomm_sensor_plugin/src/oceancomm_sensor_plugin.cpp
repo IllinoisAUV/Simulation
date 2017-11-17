@@ -64,7 +64,7 @@ namespace gazebo
   {
     static int seq=0;
 
-    this->sensor_update_time_ = this->parentSensor_->GetLastUpdateTime();
+    //this->sensor_update_time_ = this->parentSensor_->GetLastUpdateTime();
 
     if (!this->parentSensor->IsActive())
     {
