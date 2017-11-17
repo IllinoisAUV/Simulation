@@ -9,7 +9,7 @@
     </include>
 
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
-    <include file="$(find bluerov_uuv)/models/rexrov/launch/upload_engima_default.launch">
+    <include file="$(find enigma_description)/launch/upload.launch">
         <arg name="x" default="0"/>
         <arg name="y" default="0"/>
         <arg name="z" default="0"/>
@@ -17,10 +17,10 @@
     </include>
 
     <!-- Start the controller -->
-    <!-- <include file="$(find trajectory_generator_custom_controls)/launch/dp_controller.launch"> -->
-        <!-- <arg name="uuv_name" value="rexrov"/> -->
-        <!-- <arg name="model_name" value="rexrov"/> -->
-    <!-- </include> -->
+    <include file="$(find trajectory_generator_custom_controls)/launch/dp_controller.launch">
+        <arg name="uuv_name" value="rexrov"/>
+        <arg name="model_name" value="rexrov"/>
+    </include>
 
     <!-- Start the recording node  -->
     <!-- <include file="$(find uuv_gazebo)/launch/controller_demos/record_demo.launch"> -->
