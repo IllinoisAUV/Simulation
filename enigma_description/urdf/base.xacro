@@ -23,7 +23,7 @@
     the mesh pose will have to be corrected below in the <visual> block.
     Open the meshes for the RexROV vehicle in Blender to see an example on the mesh placement.
   -->
-  <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/bluerov.dae"/>
+  <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/fixed_rov.dae"/>
   <!-- <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/rex.dae"/> -->
 
   <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
