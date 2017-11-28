@@ -36,7 +36,7 @@ include_directories(
     )
 
 # add_library(${PROJECT_NAME} src/oceancomm_sensor_plugin.cpp)
-add_library(ArduCopterPlugin src/ArduCopterPlugin.cc)
+#add_library(ArduCopterPlugin src/ArduCopterPlugin.cc)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries( ArduCopterPlugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES}  )
+#target_link_libraries( ArduCopterPlugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES}  )

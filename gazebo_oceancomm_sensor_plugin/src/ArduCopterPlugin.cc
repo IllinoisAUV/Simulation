@@ -452,7 +452,7 @@ void ArduCopterPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   // Get sensors
   std::string imuName;
   getSdfParam<std::string>(_sdf, "imuName", imuName, "imu_sensor");
-  // std::string imuScopedName = this->dataPtr->model->GetWorld()->GetName()
+  //std::string imuScopedName = this->dataPtr->model->GetWorld()->GetName()
   //     + "::" + this->dataPtr->model->GetScopedName()
   //     + "::" + imuName;
   std::vector<std::string> imuScopedName =

@@ -4,14 +4,15 @@
 
     <!-- Start the a underwater world simulation scenario -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="worlds/ocean_waves.world"/>
+        <arg name="world_name" value="worlds/lake.world"/>
         <arg name="paused" value="false"/>
     </include>
 
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
-    <include file="$(find enigma_description)/launch/upload.launch">
-        <arg name="x" default="0"/>
-        <arg name="y" default="0"/>
+    <!-- <include file="$(find enigma_description)/launch/upload.launch"> -->
+    <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
+        <arg name="x" default="-5"/>
+        <arg name="y" default="20"/>
         <arg name="z" default="0"/>
         <arg name="yaw" default="0"/>
     </include>

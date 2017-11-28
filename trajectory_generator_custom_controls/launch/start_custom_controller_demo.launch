@@ -4,7 +4,7 @@
 
     <!-- Start the a underwater world simulation scenario -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="worlds/empty_underwater.world"/>
+        <arg name="world_name" value="worlds/lake.world"/>
         <arg name="paused" value="false"/>
     </include>
 
