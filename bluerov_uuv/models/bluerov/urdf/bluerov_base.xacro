@@ -146,10 +146,10 @@
     </gazebo>
 
     <!-- Include the thruster modules -->
-    <xacro:include filename="$(find bluerov_uuv)/models/bluerov/urdf/bluerov_thrusters.xacro"/>
+    <!-- <xacro:include filename="$(find bluerov_uuv)/models/bluerov/urdf/bluerov_thrusters.xacro"/> -->
 
     <!-- Include the sensor modules -->
-    <xacro:include filename="$(find bluerov_uuv)/models/bluerov/urdf/bluerov_sensors.xacro"/>
+    <!-- <xacro:include filename="$(find bluerov_uuv)/models/bluerov/urdf/bluerov_sensors.xacro"/> -->
 
   </xacro:macro>
 

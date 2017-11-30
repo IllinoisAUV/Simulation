@@ -8,9 +8,9 @@
     <xacro:property name="enigma_volume" value="1.83826"/>
 
     <!-- Describing the dimensions of the vehicle's bounding box -->
-    <xacro:property name="enigma_length" value="0"/>
+    <!-- <xacro:property name="enigma_length" value="0"/>
     <xacro:property name="enigma_width"  value="0"/>
-    <xacro:property name="enigma_height" value="0"/>
+    <xacro:property name="enigma_height" value="0"/> -->
     <xacro:property name="volume" value="1.83826"/>
 
     <xacro:macro name="enigma_hydro_model" params="namespace">

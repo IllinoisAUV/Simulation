@@ -7,7 +7,18 @@
         - The thruster pose in the <origin> block is relative to the body's center of mass. Be
           aware that Gazebo does not use the SNAME convention per default.
     -->
-
+<!--    <xacro:macro name="thruster_macro"
+    params="namespace thruster_id *origin">
+    <xacro:thruster_module_first_order_basic_fcn_macro
+      namespace="${namespace}"
+      thruster_id="${thruster_id}"
+      dyn_time_constant="0.05"
+      mesh_filename=""
+      rotor_constant="0.00031">
+      <xacro:insert_block name="origin"/>
+    </xacro:thruster_module_first_order_basic_fcn_macro>
+  </xacro:macro>
+ -->
     <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="0">
         <origin xyz="0.0 0.115 0.0" rpy="-0.0 -1.57079632679 0.0"/>
     </xacro:thruster_macro>

@@ -10,10 +10,10 @@
 
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
     <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
-        <arg name="x" default="0"/>
-        <arg name="y" default="0"/>
-        <arg name="z" default="0"/>
-        <arg name="yaw" default="0"/>
+        <arg name="x" default="-6"/>
+        <arg name="y" default="25"/>
+        <arg name="z" default="5"/>
+        <arg name="yaw" default="-90"/>
     </include>
 
     <!-- Start the controller -->

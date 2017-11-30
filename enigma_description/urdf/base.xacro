@@ -6,6 +6,7 @@
   <xacro:include filename="$(find uuv_sensor_plugins_ros)/urdf/sensor_snippets.xacro"/>
   <!-- Loading vehicle's specific macros -->
   <xacro:include filename="$(find enigma_description)/urdf/snippets.xacro"/>
+  <!-- <xacro:include filename="$(find uuv_gazebo_ros_plugins)/urdf/snippets.xacro"/> -->
 
   <!--
     Vehicle's parameters (remember to enter the model parameters below)
@@ -23,7 +24,7 @@
     the mesh pose will have to be corrected below in the <visual> block.
     Open the meshes for the RexROV vehicle in Blender to see an example on the mesh placement.
   -->
-  <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/fixed_rov.dae"/>
+  <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/fix_rov.dae"/>
   <!-- <xacro:property name="visual_mesh_file" value="file://$(find enigma_description)/meshes/rex.dae"/> -->
 
   <!-- Collision geometry mesh, usually in STL format (it is recommended to keep
@@ -56,7 +57,7 @@
         <collision>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
-            <mesh filename="${visual_mesh_file}" scale="0.1 0.1 0.1" />
+            <mesh filename="${visual_mesh_file}" scale="1 1 1" />
           </geometry>
         </collision>
       </link>
@@ -69,7 +70,7 @@
     <xacro:insert_block name="gazebo"/>
 
     <!-- Include the thruster modules -->
-    <!-- <xacro:include filename="$(find enigma_description)/urdf/thrusters.xacro"/> -->
+    <!-- <xacro:include filename="$(find enigma_description)/urdf/actuators.xacro"/> -->
 
     <!-- Include the sensor modules -->
     <!-- <xacro:include filename="$(find enigma_description)/urdf/sensors.xacro"/> -->
