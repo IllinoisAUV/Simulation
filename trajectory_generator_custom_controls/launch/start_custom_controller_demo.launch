@@ -12,8 +12,8 @@
     <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
         <arg name="x" default="-6"/>
         <arg name="y" default="25"/>
-        <arg name="z" default="5"/>
-        <arg name="yaw" default="-90"/>
+        <arg name="z" default="-1"/>
+        <arg name="yaw" default="180"/>
     </include>
 
     <!-- Start the controller -->
@@ -23,9 +23,9 @@
     </include>
 
     <!-- Start the recording node  -->
-    <include file="$(find uuv_gazebo)/launch/controller_demos/record_demo.launch">
+    <!-- <include file="$(find uuv_gazebo)/launch/controller_demos/record_demo.launch">
       <arg name="record" value="$(arg record)"/>
-    </include>
+    </include> -->
 
     <!-- Open RViz for visualization of sensor data and visualization markers -->
     <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find uuv_gazebo)/rviz/controller_demo.rviz"/>

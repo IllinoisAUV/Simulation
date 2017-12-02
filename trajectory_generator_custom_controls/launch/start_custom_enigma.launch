@@ -11,10 +11,10 @@
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
     <include file="$(find enigma_description)/launch/upload.launch">
     <!-- <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch"> -->
-        <arg name="x" default="-7"/>
-        <arg name="y" default="26"/>
-        <arg name="z" default="-3"/>
-        <arg name="yaw" default="-90"/>
+        <arg name="x" default="-6"/>
+        <arg name="y" default="25"/>
+        <arg name="z" default="-1"/>
+        <arg name="yaw" default="91"/>
     </include>
 
     <!-- Start the controller -->
