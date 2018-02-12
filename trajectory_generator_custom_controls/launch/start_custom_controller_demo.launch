@@ -4,15 +4,16 @@
 
     <!-- Start the a underwater world simulation scenario -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="worlds/lake.world"/>
+        <!-- <arg name="world_name" value="worlds/lake.world"/> -->
+        <arg name="world_name" value="worlds/bouy_hitting.world"/>
         <arg name="paused" value="false"/>
     </include>
 
     <!-- Add the RexROV vehicle to the simulation (namespace: rexrov) -->
     <include file="$(find uuv_descriptions)/models/rexrov/launch/upload_rexrov.launch">
-        <arg name="x" default="-6"/>
-        <arg name="y" default="25"/>
-        <arg name="z" default="-1"/>
+        <arg name="x" default="-10"/>
+        <arg name="y" default="-12"/>
+        <arg name="z" default="-23"/>
         <arg name="yaw" default="180"/>
     </include>
 
@@ -22,11 +23,16 @@
         <arg name="model_name" value="rexrov"/>
     </include>
 
+    <!-- <include file="$(find uuv_control_cascaded_pid)/launch/velocity_control.launch">
+        <arg name="uuv_name" value="rexrov"/>
+        <arg name="model_name" value="rexrov"/>
+    </include> -->
+
     <!-- Start the recording node  -->
     <!-- <include file="$(find uuv_gazebo)/launch/controller_demos/record_demo.launch">
       <arg name="record" value="$(arg record)"/>
     </include> -->
 
     <!-- Open RViz for visualization of sensor data and visualization markers -->
-    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find uuv_gazebo)/rviz/controller_demo.rviz"/>
+    <!-- <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find uuv_gazebo)/rviz/controller_demo.rviz"/> -->
 </launch>
